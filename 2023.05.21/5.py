@@ -15,5 +15,15 @@ print(f'{c} миль = {c * 1.61:.1f} км')
 # КОММЕНТАРИЙ: а должно быть 5.81 миль
 # 13.1 миль = 21.1 км
 
-
 # ИТОГ: доработать — 3/6
+
+# ИСПРАВЛЕНИЯ:
+
+integer, fractional = int(input('')), int(input(''))
+miles = float(f'{integer}.{fractional}')
+
+print(f'{miles} миль = {miles * 1.61:.1f} км')
+
+# 1
+# 89
+# 1.89 миль = 3.0 км
