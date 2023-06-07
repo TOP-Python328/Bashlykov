@@ -8,7 +8,8 @@ elif square_1 not in black_squares and square_2 not in black_squares:
     print("да")
 else:
     print("нет")
-    
+
+
 # c4
 # f8
 # нет
@@ -16,3 +17,5 @@ else:
 # d2
 # g5
 # да
+
+

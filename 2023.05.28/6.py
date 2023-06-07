@@ -9,7 +9,8 @@ elif -1 <= ord(square_1[0]) - ord(square_2[0]) <= 1 and -1 <= int(square_1[1]) -
     print('да')
 else:
     print('нет')
-    
+
+
 # a4
 # a5
 # да
@@ -21,3 +22,5 @@ else:
 # f6
 # a1
 # нет
+
+
