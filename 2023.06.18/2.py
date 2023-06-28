@@ -12,7 +12,7 @@ def taxi_cost(trip_length: int, waiting_time: int = 0) -> int | None:
             
         return round(price)
         
-        return None
+    return print("None")
         
 # >>> taxi_cost(1190)
 # 128
@@ -21,4 +21,4 @@ def taxi_cost(trip_length: int, waiting_time: int = 0) -> int | None:
 # >>> taxi_cost(0, 3)
 # 169
 # >>> taxi_cost(-1206, -56)
-# >>>
+# None
