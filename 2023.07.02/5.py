@@ -37,7 +37,8 @@ def logger(function: 'callable') -> 'callable':
           
     return wrapper
     
-# D:\Лилия_мои_доки\Pythom_HW_git\Rafikova\2023.05.28>python -i 5.py
+# C:\Users\Asus\OneDrive\Рабочий стол\Program\dz_python\Bashlykov\2023.07.02
+ # 22:10:45 > python -i 5.py
 # >>> def testing_function():
 # ...     pass
 # ...

@@ -9,8 +9,9 @@ def main() -> None:
     print(f'\n{important_message(text)}\n')
     
     return None
-    
-    # D:\Лилия_мои_доки\Pythom_HW_git\Rafikova\2023.05.28>python -i 2.py
+
+ # C:\Users\Asus\OneDrive\Рабочий стол\Program\dz_python\Bashlykov\2023.07.02
+ # 22:10:45 > python -i 2.py
 # >>> main()
  # Введите текст: ntrcdgadfgdh
 

@@ -16,7 +16,8 @@ def ask_for_file() -> '< module >':
         
     return load_file(path_input)
 
-# D:\Лилия_мои_доки\Pythom_HW_git\Rafikova\2023.05.28>python -i 3.py
+# C:\Users\Asus\OneDrive\Рабочий стол\Program\dz_python\Bashlykov\2023.07.02
+ # 22:10:45 > python -i 3.py
 # >>> config_module = ask_for_file()
  # Введите путь к файлу: d:\student\2023.05.28\conf.py
 # ! Ошибка, не существует файл по указанному пути !
