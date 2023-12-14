@@ -67,6 +67,7 @@ class Student(Person):
             first_name,
             patr_name,
             birthdate,
+            id_group: str = '',
             gradebook: Any = None,
             contact: Contact = None,
             id: int = 100001,
@@ -76,6 +77,7 @@ class Student(Person):
             stipendia: dec = 100
     ):
         super().__init__(last_name, first_name, patr_name, birthdate, contact)
+        self.id_group = id_group
         self.id = id
         self.form = Student.EducationForm(form)
         self.contract = Student.ContractForm(contract)
@@ -208,7 +210,7 @@ class Administrator(Employee):
 
 
     def __repr__(self):
-           return f'<ФИО:{self.last_name} {self.first_name[0]}.{self.patr_name[0]}. дата рождения: {self.birthdate} должность: {self.position.__dict__["_value_"]}, начальник: {self.head}, доход: {self.income}>'
+           return f'<ФИО:{self.last_name} {self.first_name[0]}.{self.patr_name[0]}. дата рождения: {self.birthdate} должность: {self.position.__dict__["_value_"]}, начальник: {self.head}>'
            
            
 class GradeRecord():
@@ -256,7 +258,7 @@ class Gradebook():
         pass
         
     def __repr__(self):
-       return f'<экзамен: {self.id}, студент: {self.records}>'    
+       return f'<студент: {self.id}, экзамен: {self.records}>'    
         
 # ORGANIZATION LEVEL
 
@@ -301,36 +303,120 @@ class Group(list):
             id_group: str = '',
             chief: Student = None,
             curator: Teacher = None,
+            students: list[Student] = []
     ):
         super().__init__()
         self.id_group = id_group
         self.chief = chief
         self.curator = curator
+        if students == []:
+            self.students = getattr(data, self.id_group)
+        else:
+            self.students = students 
+        
         
     def __repr__(self):
-       return f"<группа: {self.id_group}, куратор: {self.curator}, староста: {self.chief}, список студентов: {data.self.id_group}>"
+        return f"<группа: {self.id_group}, куратор: {self.curator}, староста: {self.chief}, список студентов: {self.students}>"
 
-# C:\Users\Asus\OneDrive\Рабочий стол\Program\dz_python\Bashlykov\2023.11.12
- # 21:15:52 > python -i test.py
-# >>> teacher = university.Teacher('Шац', 'Андрей', 'Борисович', '12.12.1990')
-# >>> student = university.Student('Кошелев', 'Павел', 'Борисович', '11.11.2005')
-# >>> group = university.Group("C42", student, teacher)
-# >>> group
-# Traceback (most recent call last):
-  # File "<stdin>", line 1, in <module>
-  # File "C:\Users\Asus\OneDrive\Рабочий стол\Program\dz_python\Bashlykov\2023.11.12\university.py", line 311, in __repr__
-    # return f"<группа: {self.id_group}, куратор: {self.curator}, староста: {self.chief}, список студентов: {data.self.id_group}>"
+@dataclass
+class Auditorium:
+    """Аудитория"""
+    
+    number: str = ''
+    seats: int = 0
+    building: str = ''
+    
+    def __repr__(self):
+        return f"<аудитория: {self.number}, количество мест: {self.seats}, строение: {self.building}>"
+    
+    
+class Department(OrganizationLevel):
+    """Кафедра"""
+    
+    def __init__(
+            self,
+            title,
+            description = None,
+            head = None,
+            staff = None,
+            contact = None,
+            teachers: list[Teacher] = [],
+            auditoria: list[Auditorium] = []
+    ):
+        super().__init__(title, description, head, staff, contact)
+        if teachers == []:
+            self.teachers = getattr(data, self.title)
+        else:
+            self.teachers = teachers 
+        self.auditoria = auditoria
+        
+    def __repr__(self):
+        return f"<кафедра: {self.title}, преподаватели: {self.teachers}, кабинеты: {self.auditoria}>"
 
-                       # ^^^^^^^^^
-# AttributeError: module 'data' has no attribute 'self'
 
-# C:\Users\Asus\OneDrive\Рабочий стол\Program\dz_python\Bashlykov\2023.11.12
- # 21:20:53 > python -i test.py
-# >>> teacher = university.Teacher('Шац', 'Андрей', 'Борисович', '12.12.1990')
+class Faculty(OrganizationLevel):
+    """Факультет"""
+    
+    def __init__(
+            self,
+            title,
+            description = None,
+            head = None,
+            staff = None,
+            contact = None,
+    ): 
+        super().__init__(title, description, head, staff, contact)
 
-# >>> student = university.Student('Кошелев', 'Павел', 'Борисович', '11.11.2005')
-# >>> records = university.GradeRecord('03.11.2023', teacher)
-# >>> gradebook = university.Gradebook(records, student)
-# >>> gradebook
-# <экзамен: <семестр: - 1, дата экзамена: 2023-11-03, тип экзамена: зачёт, оценка: 5, преподаватель: <ФИО:Шац А.Б. должность: учитель, ученая степень: кандидат>>, студент: <ФИО:Кошелев П.Б., ID = 100001, форма обучения: очная>>
-# >>>
+    def __repr__(self):
+        return f"<факультет {self.title}, декан: {self.head}>"
+        
+        
+    def enroll_student(self) -> None:
+        """Зачислить студента"""
+        pass
+
+   
+    def expel_student(self) -> None:
+        """Отчислить студента"""
+        pass
+        
+        
+# @singleton
+class HR(OrganizationLevel):
+    """Отдел кадров"""
+
+    def __init__(self, title): 
+        super().__init__(title)
+
+    def hire(self):
+        """Нанимать"""
+        pass
+    
+    def fire(self):
+        """Увольнять"""            
+        pass
+        
+# @singleton
+class University(OrganizationLevel):
+    """Университет"""
+    
+    def __init__(
+            self,
+            title,
+            description = None,
+            head = None,
+            staff = None,
+            contact = None,
+            hr: HR = None
+    ):
+        super().__init__(title, description, head, staff, contact)
+        self.hr = hr
+        
+    def __repr__(self):    
+        return f"<название университета: {self.title}, ректор: {self.head}, контакты: {self.contact}>"
+    
+    
+    def change_head(self, person: Administrator) -> None:
+        """Определить управляющего"""
+        pass
+
